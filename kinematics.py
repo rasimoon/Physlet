@@ -2,6 +2,8 @@ from sympy import symbols, diff, integrate, sin, cos, exp, ln, lambdify
 import numpy as np
 import shelve 
 
+
+
 def text_to_function(text, type):
    t = symbols('t')
    func = eval(text)
@@ -22,21 +24,36 @@ def text_to_function(text, type):
    kine = [pos_func, vel_func, acc_func]
    return kine 
 
+
 def get_x_pos(val):
+   try:
+    with shelve.open('constants') as constants:
+     text = constants['input_f']
+     type = constants['f_type']
+   except:
+     raise ValueError("Was unable to fetch the necessary constants.")
    t = symbols('t')
    f = lambdify(t, text_to_function(text=text, type=type)[0], modules = ['numpy'])
    return f(val)
 def get_x_vel(val):
+   try:
+    with shelve.open('constants') as constants:
+     text = constants['input_f']
+     type = constants['f_type']
+   except:
+     raise ValueError("Was unable to fetch the necessary constants.")
    t = symbols('t')
    f = lambdify(t, text_to_function(text=text, type=type)[1], modules = ['numpy'])
    return f(val)
 def get_x_acc(val):
+   try:
+    with shelve.open('constants') as constants:
+     text = constants['input_f']
+     type = constants['f_type']
+   except:
+     raise ValueError("Was unable to fetch the necessary constants.")
    t = symbols('t')
    f = lambdify(t, text_to_function(text=text, type=type)[2], modules = ['numpy'])
    return f(val)
 
-with shelve.open('constants') as constants:
-   text = constants['input_f']
-   type = constants['f_type']
- 
-  
+
