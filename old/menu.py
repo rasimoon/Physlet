@@ -98,13 +98,11 @@ if __name__ == '__main__':
         if kinematics1_button.draw():
          examples = False 
          run = False  
-         pygame.quit()
          with shelve.open('constants') as constants:
             constants['chosen_example'] = 1
-         get_constants.get_constants()
+         get_constants.get_constants(screen)
          break
-         #script_path = os.path.abspath("get_constants.py")
-         #subprocess.run([sys.executable, script_path]) 
+        
          
 
         if kinematics2_button.draw():
